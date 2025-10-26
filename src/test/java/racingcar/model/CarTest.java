@@ -41,4 +41,32 @@ class CarTest {
         assertThat(cars.get(1).getName()).isEqualTo("woni");
     }
 
+    // 03-1. move(int): 숫자가 4 이상이면 전진, 미만이면 멈춤
+    @Test
+    void 정상값_입력값_4_이상_전진() {
+        Car car = new Car("pobi");
+        car.move(4);
+        assertThat(car.getPosition()).isEqualTo(1);
+
+        car.move(9);
+        assertThat(car.getPosition()).isEqualTo(2);
+    }
+
+    @Test
+    void 입력값_3_이하() {
+        Car car = new Car("woni");
+        car.move(3);
+        assertThat(car.getPosition()).isEqualTo(0);
+
+        car.move(0);
+        assertThat(car.getPosition()).isEqualTo(0);
+    }
+
+    // 03-2. move(): 랜덤 기반 호출 — 실제 실행 시 예외 없이 동작하는지만 확인
+    @Test
+    void 정상값_랜덤기반_move_호출시_동작() {
+        Car car = new Car("pobi");
+        assertThatCode(car::move)
+                .doesNotThrowAnyException();
+    }
 }
