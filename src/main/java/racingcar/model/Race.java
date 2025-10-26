@@ -30,6 +30,21 @@ public class Race {
                 .collect(Collectors.toList());
     }
 
+    // 4) 최장거리 자동차 이름(복수 가능) 쉼표(", ")로 연결
+    public String findWinner() {
+        int max = cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
+
+        List<String> winners = cars.stream()
+                .filter(car -> car.getPosition() == max)
+                .map(Car::getName)
+                .collect(Collectors.toList());
+
+        return String.join(", ", winners);
+    }
+
     //
     public List<Car> getCars() {
         return cars;
