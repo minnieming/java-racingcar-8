@@ -1,5 +1,9 @@
 package racingcar.model;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Car {
     private final String name;
     private int position;
@@ -12,6 +16,18 @@ public class Car {
         }
         this.name = trimmed;
         this.position = 0;
+    }
+
+    // 02. 자동차 쉼표로 구분
+    public static List<Car> parseCars(String input) {
+        List<String> names = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+
+        return names.stream()
+                .map(Car::new)
+                .collect(Collectors.toList());
     }
 
     //
