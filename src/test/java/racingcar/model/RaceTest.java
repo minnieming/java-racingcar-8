@@ -45,4 +45,28 @@ class RaceTest {
         assertThat(race.canMove(4)).isTrue();  // 임계 바로 위
     }
 
+    // 3) 위치 내림차순 정렬
+    @Test
+    void 정상값_등수_내림차순() {
+        List<Car> cars = 참가자("pobi, woni, java");
+        Car pobi = cars.get(0);
+        Car woni = cars.get(1);
+        Car java = cars.get(2);
+
+        pobi.move(4); pobi.move(7);                // 2칸
+        woni.move(9); woni.move(4); woni.move(5);  // 3칸
+        java.move(4);                              // 1칸
+
+        Race race = new Race(cars);
+        List<Car> rank = race.calculateRank();
+
+        assertThat(rank).extracting(Car::getName)
+                .containsExactly("woni", "pobi", "java");
+    }
+
+    @Test
+    void 정상값_참가자0명_빈리스트() {
+        Race race = new Race(List.of());
+        assertThat(race.calculateRank()).isEmpty();
+    }
 }
