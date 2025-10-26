@@ -2,7 +2,9 @@ package racingcar.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Race {
     private final List<Car> cars;
@@ -19,6 +21,13 @@ public class Race {
     // 2) 4 이상이면 전진
     public boolean canMove(int randomNumber) {
         return randomNumber >= 4;
+    }
+
+    // 3) position 내림차순 정렬 결과 반환
+    public List<Car> calculateRank() {
+        return cars.stream()
+                .sorted(Comparator.comparingInt(Car::getPosition).reversed())
+                .collect(Collectors.toList());
     }
 
     //
