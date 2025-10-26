@@ -1,5 +1,7 @@
 package racingcar.model;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +30,19 @@ public class Car {
         return names.stream()
                 .map(Car::new)
                 .collect(Collectors.toList());
+    }
+
+    // 03-1. move(): 랜덤 기반 전진/멈춤
+    public void move() {
+        int number = Randoms.pickNumberInRange(0, 9);
+        move(number);
+    }
+
+    // 03-2. move(int): 테스트를 용이하게 하기 위해 분리
+    public void move(int number) {
+        if (number >= 4) {
+            position += 1;
+        }
     }
 
     //
