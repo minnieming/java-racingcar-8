@@ -69,4 +69,44 @@ class RaceTest {
         Race race = new Race(List.of());
         assertThat(race.calculateRank()).isEmpty();
     }
+
+    // 4) 최장거리 우승자(복수 가능)
+    @Test
+    void 정상값_단일우승자_이름만() {
+        List<Car> cars = 참가자("pobi, woni, java");
+        cars.get(1).move(4); cars.get(1).move(5); cars.get(1).move(9); // woni 3칸
+        cars.get(0).move(4); cars.get(0).move(6);                       // pobi 2칸
+        cars.get(2).move(4);                                            // java 1칸
+
+        Race race = new Race(cars);
+        assertThat(race.findWinner()).isEqualTo("woni");
+    }
+
+    @Test
+    void 정상값_공동우승자_쉼표로() {
+        List<Car> cars = 참가자("pobi, woni, java");
+        cars.get(0).move(4); cars.get(0).move(8); cars.get(0).move(5); // pobi 3칸
+        cars.get(1).move(4); cars.get(1).move(9); cars.get(1).move(7); // woni 3칸
+        cars.get(2).move(4);                                           // java 1칸
+
+        Race race = new Race(cars);
+        assertThat(race.findWinner()).isEqualTo("pobi, woni");
+    }
+
+    @Test
+    void 정상값_공동우승자_3명도_모두_반환한다() {
+        List<Car> cars = 참가자("a, b, c");
+        cars.get(0).move(4);
+        cars.get(1).move(6);
+        cars.get(2).move(9); // 모두 1칸 → 3명 공동 우승
+
+        Race race = new Race(cars);
+        assertThat(race.findWinner()).isEqualTo("a, b, c");
+    }
+
+    @Test
+    void 정상값_참가자0명_우승자는_빈문자열() {
+        Race race = new Race(List.of());
+        assertThat(race.findWinner()).isEmpty();
+    }
 }
