@@ -16,6 +16,11 @@ public class Race {
         return Randoms.pickNumberInRange(0, 9);
     }
 
+    // 2) 4 이상이면 전진
+    public boolean canMove(int randomNumber) {
+        return randomNumber >= 4;
+    }
+
     //
     public List<Car> getCars() {
         return cars;
