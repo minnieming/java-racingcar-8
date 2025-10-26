@@ -23,4 +23,26 @@ class RaceTest {
         }
     }
 
+    // 2) 4 이상 전진
+    @Test
+    void 정상값_4이상_전진() {
+        Race race = new Race(참가자("pobi, woni"));
+        assertThat(race.canMove(4)).isTrue();
+        assertThat(race.canMove(9)).isTrue();
+    }
+
+    @Test
+    void 정상값_3이하_전진불가() {
+        Race race = new Race(참가자("pobi, woni"));
+        assertThat(race.canMove(3)).isFalse();
+        assertThat(race.canMove(0)).isFalse();
+    }
+
+    @Test
+    void 정상값_canMove_경계값_검증() {
+        Race race = new Race(참가자("pobi"));
+        assertThat(race.canMove(3)).isFalse(); // 임계 바로 아래
+        assertThat(race.canMove(4)).isTrue();  // 임계 바로 위
+    }
+
 }
