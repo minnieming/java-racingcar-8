@@ -19,9 +19,9 @@ class InputViewTest {
 
     @Test
     void 쉼표_구분자_오류() {
-        assertThatThrownBy(() -> inputView.carNameValidate("pobi")) // 하나만
+        assertThatThrownBy(() -> inputView.carNameValidate("pobi"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputView.carNameValidate("pobi woni")) // 공백 구분
+        assertThatThrownBy(() -> inputView.carNameValidate("pobi woni"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

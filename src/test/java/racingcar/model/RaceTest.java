@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class RaceTest {
 
-    // 테스트 편의: 참가자 생성
+    // 참가자 생성
     private List<Car> 참가자(String 입력) {
         return Car.parseCars(입력);
     }
@@ -41,8 +41,8 @@ class RaceTest {
     @Test
     void 정상값_canMove_경계값_검증() {
         Race race = new Race(참가자("pobi"));
-        assertThat(race.canMove(3)).isFalse(); // 임계 바로 아래
-        assertThat(race.canMove(4)).isTrue();  // 임계 바로 위
+        assertThat(race.canMove(3)).isFalse();
+        assertThat(race.canMove(4)).isTrue();
     }
 
     // 3) 위치 내림차순 정렬
@@ -53,9 +53,9 @@ class RaceTest {
         Car woni = cars.get(1);
         Car java = cars.get(2);
 
-        pobi.move(4); pobi.move(7);                // 2칸
-        woni.move(9); woni.move(4); woni.move(5);  // 3칸
-        java.move(4);                              // 1칸
+        pobi.move(4); pobi.move(7);
+        woni.move(9); woni.move(4); woni.move(5);
+        java.move(4);
 
         Race race = new Race(cars);
         List<Car> rank = race.calculateRank();
@@ -74,9 +74,9 @@ class RaceTest {
     @Test
     void 정상값_단일우승자_이름만() {
         List<Car> cars = 참가자("pobi, woni, java");
-        cars.get(1).move(4); cars.get(1).move(5); cars.get(1).move(9); // woni 3칸
-        cars.get(0).move(4); cars.get(0).move(6);                       // pobi 2칸
-        cars.get(2).move(4);                                            // java 1칸
+        cars.get(1).move(4); cars.get(1).move(5); cars.get(1).move(9);
+        cars.get(0).move(4); cars.get(0).move(6);
+        cars.get(2).move(4);
 
         Race race = new Race(cars);
         assertThat(race.findWinner()).isEqualTo("woni");
@@ -85,9 +85,9 @@ class RaceTest {
     @Test
     void 정상값_공동우승자_쉼표로() {
         List<Car> cars = 참가자("pobi, woni, java");
-        cars.get(0).move(4); cars.get(0).move(8); cars.get(0).move(5); // pobi 3칸
-        cars.get(1).move(4); cars.get(1).move(9); cars.get(1).move(7); // woni 3칸
-        cars.get(2).move(4);                                           // java 1칸
+        cars.get(0).move(4); cars.get(0).move(8); cars.get(0).move(5);
+        cars.get(1).move(4); cars.get(1).move(9); cars.get(1).move(7);
+        cars.get(2).move(4);
 
         Race race = new Race(cars);
         assertThat(race.findWinner()).isEqualTo("pobi, woni");
@@ -98,7 +98,7 @@ class RaceTest {
         List<Car> cars = 참가자("a, b, c");
         cars.get(0).move(4);
         cars.get(1).move(6);
-        cars.get(2).move(9); // 모두 1칸 → 3명 공동 우승
+        cars.get(2).move(9);
 
         Race race = new Race(cars);
         assertThat(race.findWinner()).isEqualTo("a, b, c");

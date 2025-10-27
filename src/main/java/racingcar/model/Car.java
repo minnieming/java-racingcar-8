@@ -10,9 +10,9 @@ public class Car {
     private final String name;
     private int position;
 
-    // 01. 이름 길이 검증 (입력값 null/빈 문자열 검증은 InputView에서 처리)
+    // 01. 이름 길이 검증
     public Car(String name) {
-        String trimmed = name.trim();  // InputView에서 이미 공백, null 방지됨
+        String trimmed = name.trim();
         if (trimmed.length() > 5) {
             throw new IllegalArgumentException(ErrorMessages.NAME_TOO_LONG);
         }
@@ -32,13 +32,13 @@ public class Car {
                 .collect(Collectors.toList());
     }
 
-    // 03-1. move(): 랜덤 기반 전진/멈춤
+    // 03-1. 랜덤 기반 전진/멈춤
     public void move() {
         int number = Randoms.pickNumberInRange(0, 9);
         move(number);
     }
 
-    // 03-2. move(int): 테스트를 용이하게 하기 위해 분리
+    // 03-2. 테스트를 용이하게 하기 위해 분리
     public void move(int number) {
         if (number >= 4) {
             position += 1;

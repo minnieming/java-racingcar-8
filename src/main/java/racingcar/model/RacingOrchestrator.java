@@ -38,12 +38,11 @@ public class RacingOrchestrator {
         outputView.printAll(snapshots, winnersCsv);
     }
 
-    // 출력용 스냅샷
     private Car copyOf(Car original) {
         Car copied = new Car(original.getName());
         int steps = original.getPosition();
         for (int i = 0; i < steps; i++) {
-            copied.move(4); // 4 이상이면 전진하는 규칙을 이용해 position 재현
+            copied.move(4);
         }
         return copied;
     }

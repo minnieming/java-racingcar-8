@@ -31,23 +31,21 @@ class OutputViewTest {
 
     @Test
     void 정상값_전체출력() {
-        // given
+
         List<Car> round1 = List.of(new Car("pobi"), new Car("woni"), new Car("jun"));
         List<Car> round2 = List.of(new Car("pobi"), new Car("woni"), new Car("jun"));
-        // 각 car position 임의 변경
-        round1.get(0).move(4); // pobi: 1칸
-        round1.get(2).move(4); // jun: 1칸
-        round2.get(0).move(4); // pobi: 2칸
-        round2.get(1).move(4); // woni: 1칸
-        round2.get(2).move(4); // jun: 2칸
+
+        round1.get(0).move(4);
+        round1.get(2).move(4);
+        round2.get(0).move(4);
+        round2.get(1).move(4);
+        round2.get(2).move(4);
 
         List<List<Car>> snapshots = List.of(round1, round2);
         String winners = "pobi, jun";
 
-        // when
         outputView.printAll(snapshots, winners);
 
-        // then
         String result = outContent.toString();
         assertThat(result).contains("실행 결과");
         assertThat(result).contains("pobi : -");
